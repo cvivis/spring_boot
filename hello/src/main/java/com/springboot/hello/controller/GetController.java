@@ -27,8 +27,7 @@ public class GetController {
     }
 
     @GetMapping("/request2")
-    public String getVariable4(@RequestParam
-                               Map<String, String> param) {
+    public String getVariable4(@RequestParam Map<String, String> param) {
         param.entrySet().forEach(
                 (map) -> {
                     System.out.printf("key:%s value:%s\n", map.getKey(), map.getValue());
