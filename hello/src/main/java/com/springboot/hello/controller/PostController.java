@@ -9,6 +9,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("api/post-api")
 public class PostController {
+
+
     @RequestMapping(value = "/domain", method = RequestMethod.POST)
     public String postExample() {
         return "Hello Post API";
