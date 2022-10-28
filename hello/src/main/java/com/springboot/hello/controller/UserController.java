@@ -20,19 +20,19 @@ public class UserController {
         this.userDao = userDao;
     }
 
-    @GetMapping(value = "/get/{userId}")
-    public String getUserId(@PathVariable String userId) throws SQLException {
+    @GetMapping(value = "/{userId}")
+    public ResponseEntity<User> getUserId(@PathVariable String userId) throws SQLException {
         User user = userDao.selectId(userId);
-        return user.getId();
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
     }
 
-    @PostMapping("/post")
+    @PostMapping("")
     public ResponseEntity<User> postUser(@RequestBody User user) throws SQLException {
         userDao.insert(user);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/all")
     public int deleteUserAll() throws SQLException {
         int deleteCount = userDao.deleteAll();
         return deleteCount;
