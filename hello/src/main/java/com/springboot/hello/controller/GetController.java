@@ -1,11 +1,13 @@
 package com.springboot.hello.controller;
 
 import com.springboot.hello.controller.domain.dto.MemberDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
+@Slf4j
 @RequestMapping("/api/get-api")
 public class GetController {
 
@@ -38,6 +40,15 @@ public class GetController {
 
     @GetMapping("/request3")
     public String getRequestParam(MemberDto memberDto) {
+//        log.info("getVariable3으로 요청이 들어왔습니다. variable:{}", variable);
         return memberDto.toString();
+
     }
+
+    @GetMapping(value = "/variable1/{variable}")
+    public String getVariable(@PathVariable String variable) {
+        log.info("getVariable1으로 요청이 들어왔습니다. variable:{}", variable);
+        return variable;
+    }
+
 }
