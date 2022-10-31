@@ -21,8 +21,14 @@ public class ReadLineContext<T> {
                 new FileReader(filename)
         );
         String str;
+        reader.readLine();
         while ((str = reader.readLine()) != null) {
+            try{
             result.add(parser.parse(str));
+            }catch (Exception e){
+                System.out.printf("파싱중 문제가 생겨 이 라인은 넘어갑니다. 파일내용:%s\n", str.substring(0, 20));
+            }
+
         }
         reader.close();
         return result;
