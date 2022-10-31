@@ -16,6 +16,7 @@ import java.sql.SQLException;
 public class UserController {
 
     private final UserDao userDao;
+
     public UserController(UserDao userDao) {
         this.userDao = userDao;
     }
@@ -32,10 +33,22 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
     }
 
+    @GetMapping("/user")
+    public User addAndGet() throws SQLException {
+        userDao.insert(new User("1", "Suin", "1026"));
+        return userDao.selectId("1");
+    }
+
+    //    @DeleteMapping("/all")
+//    public int deleteUserAll() throws SQLException {
+//        int deleteCount = userDao.deleteAll();
+//        return deleteCount;
+//    }
     @DeleteMapping("/all")
-    public int deleteUserAll() throws SQLException {
-        int deleteCount = userDao.deleteAll();
-        return deleteCount;
+    public ResponseEntity<Integer> deleteAll() throws SQLException {
+        return ResponseEntity
+                .ok()
+                .body(userDao.deleteAll());
     }
 
 }

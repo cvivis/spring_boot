@@ -54,7 +54,6 @@ public class UserDao {
     }
 
     public int getCount() throws SQLException {
-
         return this.jdbcTemplate.queryForObject("select count(*) from users",Integer.class);
     }
 
