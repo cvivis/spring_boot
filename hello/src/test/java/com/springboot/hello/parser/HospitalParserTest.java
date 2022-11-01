@@ -30,13 +30,49 @@ class HospitalParserTest {
     @Autowired
     HospitalDao hospitalDao;
 
+
+    //    private int id;
+    //    private String openServiceName;
+    //    private int openLocalGovernmentCode;
+    //    private String managementNumber;
+    //    private LocalDateTime licenseDate;
+    //    private int businessStatus;
+    //    private int businessStatusCode;
+    //    private String phone;
+    //    private String fullAddress;
+    //    private String roadNameAddress;
+    //    private String hospitalName;
+    //    private String businessTypeName;
+    //    private int healthcareProviderCount;
+    //    private int patientRoomCount;
+    //    private int totalNumberOfBeds;
+    //    private float totalAreaSize;
     @Test
-    @DisplayName("add 테스트")
-    void add(){
+    @DisplayName("add, get테스트")
+    void addAndGet(){
+        hospitalDao.deleteAll();
+        assertEquals(0,hospitalDao.getCount());
         HospitalParser hp = new HospitalParser();
         Hospital hospital = hp.parse(str);
         hospitalDao.add(hospital);
-        assertEquals(4,hospitalDao.getCount());
+        assertEquals(1,hospitalDao.getCount());
+        Hospital selectHospital = hospitalDao.findById(hospital.getId());
+        assertEquals(hospital.getId(),selectHospital.getId());
+        assertEquals(hospital.getOpenServiceName(),selectHospital.getOpenServiceName());
+        assertEquals(hospital.getOpenLocalGovernmentCode(),selectHospital.getOpenLocalGovernmentCode());
+        assertEquals(hospital.getManagementNumber(),selectHospital.getManagementNumber());
+        assertEquals(hospital.getLicenseDate(),selectHospital.getLicenseDate());
+        assertEquals(hospital.getBusinessStatus(),selectHospital.getBusinessStatus());
+        assertEquals(hospital.getBusinessStatusCode(),selectHospital.getBusinessStatusCode());
+        assertEquals(hospital.getPhone(),selectHospital.getPhone());
+        assertEquals(hospital.getFullAddress(),selectHospital.getFullAddress());
+        assertEquals(hospital.getRoadNameAddress(),selectHospital.getRoadNameAddress());
+        assertEquals(hospital.getHospitalName(),selectHospital.getHospitalName());
+        assertEquals(hospital.getBusinessTypeName(),selectHospital.getBusinessTypeName());
+        assertEquals(hospital.getHealthcareProviderCount(),selectHospital.getHealthcareProviderCount());
+        assertEquals(hospital.getPatientRoomCount(),selectHospital.getPatientRoomCount());
+        assertEquals(hospital.getTotalNumberOfBeds(),selectHospital.getTotalNumberOfBeds());
+        assertEquals(hospital.getTotalAreaSize(),selectHospital.getTotalAreaSize());
     }
 //
 //    @Test
