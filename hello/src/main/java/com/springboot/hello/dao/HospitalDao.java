@@ -2,7 +2,10 @@ package com.springboot.hello.dao;
 
 import com.springboot.hello.domain.Hospital;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
+@Component
 public class HospitalDao {
 
     private final JdbcTemplate jdbcTemplate;
