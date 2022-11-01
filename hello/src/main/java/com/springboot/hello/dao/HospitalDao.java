@@ -31,4 +31,10 @@ public class HospitalDao {
                 );
 
     }
+
+    public int getCount() {
+        String sql = "select count(id) from hospitals;";
+        return this.jdbcTemplate.queryForObject(sql, Integer.class);
+    }
+
 }
