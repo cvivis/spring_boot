@@ -29,5 +29,12 @@ public class Hospital {
     private int totalNumberOfBeds;
     private float totalAreaSize;
 
+    public String businessStatusStr(Hospital hospital){
+        String BusinessStatusStr = "";
+        if(hospital.getBusinessStatus()==1)BusinessStatusStr = "정상";
+        else if(hospital.getBusinessStatus()==2) BusinessStatusStr = "휴업";
+        else if(hospital.getBusinessStatus()==3) BusinessStatusStr = "폐업";
+        return BusinessStatusStr;
+    }
 
 }
