@@ -15,5 +15,5 @@ public class GetHospitalRes {
     private int healthcareProviderCount; //의료진 수
     private int patientRoomCount; //병상 수
     private float totalAreaSize; // 면적
-    private int businessStatus; //3:폐업, 1:영업
+    private String businessStatusStr; //3:폐업, 1:영업
 }

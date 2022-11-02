@@ -26,6 +26,10 @@ public class hospitalController {
     @GetMapping(value = "/{hospitalId}")
     public GetHospitalRes getHospitalId(@PathVariable int hospitalId) throws SQLException {
         Hospital hospital = hospitalDao.findById(hospitalId);
+        String BusinessStatusStr = "";
+        if(hospital.getBusinessStatus()==1)BusinessStatusStr = "정상";
+        else if(hospital.getBusinessStatus()==2) BusinessStatusStr = "휴업";
+        else if(hospital.getBusinessStatus()==3) BusinessStatusStr = "폐업";
         GetHospitalRes hospitalRes = new GetHospitalRes(
                 hospital.getHospitalName(),
                 hospital.getFullAddress(),
@@ -33,9 +37,25 @@ public class hospitalController {
                 hospital.getHealthcareProviderCount(),
                 hospital.getPatientRoomCount(),
                 hospital.getTotalAreaSize(),
-                hospital.getBusinessStatus()
+                BusinessStatusStr
         );
         return hospitalRes;
     }
+
+    //면적이 N(ex 100제곱미터)제곱미터 이상인 병원을 최대 10개만 출력하는 API End point
+//    @GetMapping(value = "/{hospitalId}")
+//    public GetHospitalRes getHospitalId(@PathVariable int hospitalId) throws SQLException {
+//        Hospital hospital = hospitalDao.findById(hospitalId);
+//        GetHospitalRes hospitalRes = new GetHospitalRes(
+//                hospital.getHospitalName(),
+//                hospital.getFullAddress(),
+//                hospital.getRoadNameAddress(),
+//                hospital.getHealthcareProviderCount(),
+//                hospital.getPatientRoomCount(),
+//                hospital.getTotalAreaSize(),
+//                hospital.getBusinessStatus()
+//        );
+//        return hospitalRes;
+//    }
 
 }
