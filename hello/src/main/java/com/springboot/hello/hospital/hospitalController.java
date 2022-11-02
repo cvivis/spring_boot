@@ -26,10 +26,6 @@ public class hospitalController {
     @GetMapping(value = "/{hospitalId}")
     public GetHospitalRes getHospitalId(@PathVariable int hospitalId) throws SQLException {
         Hospital hospital = hospitalDao.findById(hospitalId);
-//        String BusinessStatusStr = "";
-//        if(hospital.getBusinessStatus()==1)BusinessStatusStr = "정상";
-//        else if(hospital.getBusinessStatus()==2) BusinessStatusStr = "휴업";
-//        else if(hospital.getBusinessStatus()==3) BusinessStatusStr = "폐업";
         GetHospitalRes hospitalRes = new GetHospitalRes(
                 hospital.getHospitalName(),
                 hospital.getFullAddress(),

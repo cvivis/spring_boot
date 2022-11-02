@@ -2,6 +2,7 @@ package com.springboot.hello.parser;
 
 import com.springboot.hello.dao.HospitalDao;
 import com.springboot.hello.domain.Hospital;
+import com.springboot.hello.service.HospitalService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,23 +31,10 @@ class HospitalParserTest {
     @Autowired
     HospitalDao hospitalDao;
 
+    @Autowired
+    HospitalService hospitalService;
 
-    //    private int id;
-    //    private String openServiceName;
-    //    private int openLocalGovernmentCode;
-    //    private String managementNumber;
-    //    private LocalDateTime licenseDate;
-    //    private int businessStatus;
-    //    private int businessStatusCode;
-    //    private String phone;
-    //    private String fullAddress;
-    //    private String roadNameAddress;
-    //    private String hospitalName;
-    //    private String businessTypeName;
-    //    private int healthcareProviderCount;
-    //    private int patientRoomCount;
-    //    private int totalNumberOfBeds;
-    //    private float totalAreaSize;
+    
     @Test
     @DisplayName("add, get테스트")
     void addAndGet(){
@@ -75,43 +63,40 @@ class HospitalParserTest {
         assertEquals(hospital.getTotalAreaSize(),selectHospital.getTotalAreaSize());
     }
 //
-//    @Test
-//    @DisplayName("테스트 1줄을 Hospital로 잘 만드는지 확인")
-//    void convertToHospital() {
-//        HospitalParser hp = new HospitalParser();
-//        Hospital hospital = hp.parse(str);
-//
-//        assertEquals(1, hospital.getId()); // col:0
-//        assertEquals("의원", hospital.getOpenServiceName());//col:1
-//        assertEquals(3620000,hospital.getOpenLocalGovernmentCode()); // col: 3
-//        assertEquals("PHMA119993620020041100004",hospital.getManagementNumber()); // col:4
-//        assertEquals(LocalDateTime.of(1999, 6, 12, 0, 0, 0), hospital.getLicenseDate()); //19990612 //col:5
-//        assertEquals(1, hospital.getBusinessStatus()); //col:7
-//        assertEquals(13, hospital.getBusinessStatusCode());//col:9
-//        assertEquals("062-515-2875", hospital.getPhone());//col:15
-//        assertEquals("광주광역시 북구 풍향동 565번지 4호 3층", hospital.getFullAddress()); //col:18
-//        assertEquals("광주광역시 북구 동문대로 24, 3층 (풍향동)", hospital.getRoadNameAddress());//col:19
-//        assertEquals("효치과의원", hospital.getHospitalName());//col:21
-//        assertEquals("치과의원", hospital.getBusinessTypeName());//col:25
-//        assertEquals(1, hospital.getHealthcareProviderCount()); //col:29
-//        assertEquals(0, hospital.getPatientRoomCount()); //col:30
-//        assertEquals(0, hospital.getTotalNumberOfBeds()); //col:31
-//        assertEquals(52.29f, hospital.getTotalAreaSize()); //col:32
-//
-//
-//    }
-//    @Test
-//    @DisplayName("10만건 이상의 데이터가 파싱되는지")
-//    void name() throws IOException {
+    @Test
+    @DisplayName("테스트 1줄을 Hospital로 잘 만드는지 확인")
+    void convertToHospital() {
+        HospitalParser hp = new HospitalParser();
+        Hospital hospital = hp.parse(str);
+
+        assertEquals(1, hospital.getId()); // col:0
+        assertEquals("의원", hospital.getOpenServiceName());//col:1
+        assertEquals(3620000,hospital.getOpenLocalGovernmentCode()); // col: 3
+        assertEquals("PHMA119993620020041100004",hospital.getManagementNumber()); // col:4
+        assertEquals(LocalDateTime.of(1999, 6, 12, 0, 0, 0), hospital.getLicenseDate()); //19990612 //col:5
+        assertEquals(1, hospital.getBusinessStatus()); //col:7
+        assertEquals(13, hospital.getBusinessStatusCode());//col:9
+        assertEquals("062-515-2875", hospital.getPhone());//col:15
+        assertEquals("광주광역시 북구 풍향동 565번지 4호 3층", hospital.getFullAddress()); //col:18
+        assertEquals("광주광역시 북구 동문대로 24, 3층 (풍향동)", hospital.getRoadNameAddress());//col:19
+        assertEquals("효치과의원", hospital.getHospitalName());//col:21
+        assertEquals("치과의원", hospital.getBusinessTypeName());//col:25
+        assertEquals(1, hospital.getHealthcareProviderCount()); //col:29
+        assertEquals(0, hospital.getPatientRoomCount()); //col:30
+        assertEquals(0, hospital.getTotalNumberOfBeds()); //col:31
+        assertEquals(52.29f, hospital.getTotalAreaSize()); //col:32
+
+
+    }
+    @Test
+    @DisplayName("10만건 이상의 데이터가 파싱되는지")
+    void addBigdata() throws IOException {
+        hospitalDao.deleteAll();
 //        String filename = "/Users/admin/Downloads/fulldata_01_01_02_P_의원.csv";
-////        String filename = "/Users/admin/Downloads/line1.csv"; form 확인용 한줄짜리 csv
-////        System.out.println("st2 : "+str);
-//        List<Hospital> list = hospitalReadLineContext.readByLine(filename);
-//        assertTrue(list.size() > 10000);
-//        for (int i = 0; i <10 ; i++) {
-//            System.out.println(list.get(0).getHospitalName());
-//        }
-//        System.out.printf("파싱된 데이터 개수: %d", list.size());
-//
-//    }
+        String filename = "/Users/admin/Downloads/bigdata.csv";
+        int cnt = this.hospitalService.insertLargeVolumeHospitalData(filename);
+        assertTrue(cnt > 1000);
+        System.out.printf("파싱된 데이터 개수: %d", cnt);
+
+    }
 }

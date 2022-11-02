@@ -37,7 +37,7 @@ public class HospitalParser implements Parser<Hospital>{
             return hospital;
         } catch (NumberFormatException e) {
 //            System.out.println(e.getMessage());
-            e.printStackTrace();
+//            e.printStackTrace();
             throw new RuntimeException();
         }
     }
