@@ -1,7 +1,7 @@
-package com.springboot.hello.memberController;
+package com.springboot.hello.member;
 
 
-import com.springboot.hello.memberController.domain.dto.MemberDto;
+import com.springboot.hello.member.domain.dto.MemberDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;

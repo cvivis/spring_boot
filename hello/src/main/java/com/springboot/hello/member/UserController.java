@@ -1,4 +1,4 @@
-package com.springboot.hello.memberController;
+package com.springboot.hello.member;
 
 import com.springboot.hello.dao.UserDao;
 import com.springboot.hello.domain.User;
